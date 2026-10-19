@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn data structures and algorithms through interactive visualizations, hands-on exercises, and quizzes." />
+  <meta name="theme-color" content="#03060f" />
+  <title>DSA Learning Lab | Interactive Computer Science</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+  <!-- Floating 3D background scene -->
+  <div class="scene" aria-hidden="true">
+    <div class="geo geo-1"></div>
+    <div class="geo geo-2"></div>
+    <div class="geo geo-3"></div>
+    <div class="geo geo-4"></div>
+    <div class="geo-hex geo-hex-1"></div>
+    <div class="geo-hex geo-hex-2"></div>
+    <div class="geo-line geo-line-1"></div>
+    <div class="geo-line geo-line-2"></div>
+  </div>
+
+  <!-- ===== SIDEBAR ===== -->
+  <nav id="sidebar" class="sidebar" aria-label="Main navigation">
+    <div class="sidebar-brand">
+      <div class="brand-mark" aria-hidden="true"></div>
+      <span class="brand-text">DSA Lab</span>
+    </div>
+
+    <ul class="nav-list" role="list">
+      <li><button class="nav-item active" data-section="dashboard">
+        <span class="nav-dot" aria-hidden="true"></span>Dashboard
+      </button></li>
+      <li><button class="nav-item" data-section="visualizer">
+        <span class="nav-dot" aria-hidden="true"></span>Visualizer
+      </button></li>
+      <li><button class="nav-item" data-section="datastructures">
+        <span class="nav-dot" aria-hidden="true"></span>Data Structures
+      </button></li>
+      <li><button class="nav-item" data-section="quiz">
+        <span class="nav-dot" aria-hidden="true"></span>Quiz &amp; Practice
+      </button></li>
+      <li><button class="nav-item" data-section="reference">
+        <span class="nav-dot" aria-hidden="true"></span>Reference
+      </button></li>
+    </ul>
+
+    <div class="sidebar-progress">
+      <div class="progress-meta">
+        <span>Progress</span>
+        <span id="sessionProgressText">0 / 5</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="sessionProgress" style="width:0%"></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== MAIN WRAPPER ===== -->
+  <div class="main-wrapper" id="mainWrapper">
+
+    <!-- Header -->
+    <header class="app-header" aria-label="Application header">
+      <div class="header-left">
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation">&#9776;</button>
+        <span class="header-title">DSA Learning Lab</span>
+      </div>
+      <div class="header-right">
+        <div class="stat-chip">
+          <span class="stat-chip-dot"></span>
+          Score <strong id="quizScore">—</strong>
+        </div>
+        <div class="stat-chip">
+          Modules <strong id="moduleCount">0</strong>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===================================================
+         DASHBOARD
+         =================================================== -->
+    <section id="section-dashboard" class="content-section active" aria-label="Dashboard">
+      <div class="section-header">
+        <span class="section-tag">Interactive CS Education</span>
+        <h2>Data Structures &amp; Algorithms</h2>
+        <p class="section-subtitle">Understand algorithms through step-by-step animation, visual concept explanations, and hands-on experimentation. Built for learners from zero prior knowledge.</p>
+      </div>
+
+      <div class="module-grid">
+        <div class="module-card" data-target="visualizer" role="button" tabindex="0">
+          <div class="module-card-num">Module 01</div>
+          <h3>Algorithm Visualizer</h3>
+          <p>Watch Bubble, Selection, and Insertion Sort animate bar-by-bar. Explore Linear and Binary Search with highlighted search ranges and eliminated zones.</p>
+          <div class="module-tags">
+            <span class="tag tag-cyan">Sorting</span>
+            <span class="tag tag-pink">Searching</span>
+            <span class="tag tag-purple">Step Control</span>
+          </div>
+          <div class="module-arrow">Launch &rarr;</div>
+        </div>
+
+        <div class="module-card" data-target="datastructures" role="button" tabindex="0">
+          <div class="module-card-num">Module 02</div>
+          <h3>Data Structures Playground</h3>
+          <p>Push, pop, enqueue, dequeue, insert, and delete — every operation reflected instantly in a live visual representation of the structure.</p>
+          <div class="module-tags">
+            <span class="tag tag-cyan">Stack</span>
+            <span class="tag tag-pink">Queue</span>
+            <span class="tag tag-green">Linked List</span>
+          </div>
+          <div class="module-arrow">Launch &rarr;</div>
+        </div>
+
+        <div class="module-card" data-target="quiz" role="button" tabindex="0">
+          <div class="module-card-num">Module 03</div>
+          <h3>Quiz &amp; Practice</h3>
+          <p>A randomised set of questions each session — covering complexity, sorting behaviour, data structure operations, and algorithmic reasoning.</p>
+          <div class="module-tags">
+            <span class="tag tag-cyan">Randomised</span>
+            <span class="tag tag-pink">Feedback</span>
+            <span class="tag tag-purple">Challenges</span>
+          </div>
+          <div class="module-arrow">Launch &rarr;</div>
+        </div>
+
+        <div class="module-card" data-target="reference" role="button" tabindex="0">
+          <div class="module-card-num">Module 04</div>
+          <h3>Complexity Reference</h3>
+          <p>Searchable Big-O cheat sheet for every major algorithm and data structure. Covers best, average, worst case time and auxiliary space.</p>
+          <div class="module-tags">
+            <span class="tag tag-cyan">Big-O</span>
+            <span class="tag tag-green">Searchable</span>
+          </div>
+          <div class="module-arrow">Launch &rarr;</div>
+        </div>
+      </div>
+
+      <div class="info-panel">
+        <div class="info-panel-accent" aria-hidden="true"></div>
+        <span><strong style="color:var(--t1);">Getting started:</strong> Open the Visualizer, enter an array of integers (or generate a random one), then use Play or Next/Prev to walk through the algorithm one operation at a time. Each step explains what is happening and why.</span>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         ALGORITHM VISUALIZER
+         =================================================== -->
+    <section id="section-visualizer" class="content-section" aria-label="Algorithm Visualizer">
+      <div class="section-header">
+        <span class="section-tag">Module 01</span>
+        <h2>Algorithm Visualizer</h2>
+        <p class="section-subtitle">Select an algorithm, enter your data, and step through every comparison and swap.</p>
+      </div>
+
+      <div class="algo-tabs" role="tablist" aria-label="Algorithm selection">
+        <button class="algo-tab active" data-algo="bubble" role="tab" aria-selected="true">Bubble Sort</button>
+        <button class="algo-tab" data-algo="selection" role="tab" aria-selected="false">Selection Sort</button>
+        <button class="algo-tab" data-algo="insertion" role="tab" aria-selected="false">Insertion Sort</button>
+        <button class="algo-tab" data-algo="linear" role="tab" aria-selected="false">Linear Search</button>
+        <button class="algo-tab" data-algo="binary" role="tab" aria-selected="false">Binary Search</button>
+      </div>
+
+      <!-- Concept card (dynamically filled) -->
+      <div class="concept-card" id="conceptCard" aria-live="polite">
+        <div class="concept-visual" id="conceptVisual"></div>
+        <div class="concept-text">
+          <h4 id="conceptTitle">Core Idea</h4>
+          <p id="conceptDesc">Select an algorithm above to see a visual explanation of how it works.</p>
+        </div>
+      </div>
+
+      <div class="visualizer-layout">
+        <!-- Controls -->
+        <div class="glass viz-controls">
+          <!-- Sorting controls -->
+          <div id="sortControls">
+            <div style="margin-bottom:10px;">
+              <div class="ctrl-label">Array &mdash; comma-separated integers</div>
+              <input type="text" id="arrayInput" class="ctrl-input" placeholder="e.g. 5, 3, 8, 1, 9" aria-label="Array input" style="margin-bottom:7px;" />
+              <div class="ctrl-row">
+                <button class="btn btn-secondary btn-sm" id="randomArrayBtn">Random</button>
+                <button class="btn btn-secondary btn-sm" id="resetArrayBtn">Clear</button>
+              </div>
+            </div>
+            <div>
+              <div class="ctrl-label">Speed</div>
+              <div class="speed-group" role="group" aria-label="Animation speed">
+                <button class="speed-opt" data-speed="2000">Slow</button>
+                <button class="speed-opt active" data-speed="800">Normal</button>
+                <button class="speed-opt" data-speed="200">Fast</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search controls -->
+          <div id="searchControls" style="display:none;">
+            <div style="margin-bottom:8px;">
+              <div class="ctrl-label">Array &mdash; comma-separated integers</div>
+              <input type="text" id="searchArrayInput" class="ctrl-input" placeholder="e.g. 2, 5, 8, 12, 16" aria-label="Search array" style="margin-bottom:7px;" />
+              <div class="ctrl-label">Target value</div>
+              <input type="number" id="searchTargetInput" class="ctrl-input" placeholder="e.g. 8" aria-label="Target value" style="margin-bottom:7px;" />
+              <div class="ctrl-row">
+                <button class="btn btn-secondary btn-sm" id="randomSearchBtn">Random</button>
+                <button class="btn btn-secondary btn-sm" id="resetSearchBtn">Clear</button>
+              </div>
+            </div>
+            <div>
+              <div class="ctrl-label">Speed</div>
+              <div class="speed-group search-speed" role="group" aria-label="Search speed">
+                <button class="speed-opt" data-speed="2000">Slow</button>
+                <button class="speed-opt active" data-speed="800">Normal</button>
+                <button class="speed-opt" data-speed="200">Fast</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Playback controls -->
+          <div class="playback-group" role="group" aria-label="Playback controls">
+            <button class="btn btn-primary" id="playPauseBtn">Play</button>
+            <div class="playback-row">
+              <button class="btn btn-secondary btn-sm" id="prevStepBtn" disabled>&#9664; Prev</button>
+              <button class="btn btn-secondary btn-sm" id="nextStepBtn" disabled>Next &#9654;</button>
+            </div>
+            <button class="btn btn-ghost btn-sm" id="resetVizBtn">Reset</button>
+          </div>
+
+          <!-- Stats -->
+          <div class="glass-inner" style="padding:12px 14px;">
+            <div class="stats-grid">
+              <div class="stat-row">
+                <span class="stat-name">Step</span>
+                <span class="stat-val" id="stepCounter">— / —</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-name">Comparisons</span>
+                <span class="stat-val" id="compCounter">—</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-name">Swaps</span>
+                <span class="stat-val" id="swapCounter">—</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Variable tracker -->
+          <div class="glass-inner var-tracker" id="varTracker" style="display:none;">
+            <div class="var-tracker-title">Variables</div>
+            <div id="varDisplay"></div>
+          </div>
+        </div>
+
+        <!-- Main visualization -->
+        <div class="viz-main">
+          <div class="glass viz-area" id="vizArea" aria-label="Visualization" aria-live="polite">
+            <div id="vizBars" class="bars-container"></div>
+            <div id="vizEmpty" class="viz-empty">
+              <div class="viz-empty-icon" aria-hidden="true">&#9658;</div>
+              <p class="viz-empty-text">Enter an array and press <code>Play</code>, or use <code>Next</code> to step through manually.</p>
+            </div>
+          </div>
+
+          <!-- Color legend -->
+          <div class="glass-inner color-legend" id="colorLegend" style="display:none;" aria-label="Color legend">
+            <div class="legend-item"><div class="legend-dot ld-default"></div>Unsorted</div>
+            <div class="legend-item"><div class="legend-dot ld-comparing"></div>Comparing</div>
+            <div class="legend-item"><div class="legend-dot ld-swapping"></div>Swapping</div>
+            <div class="legend-item"><div class="legend-dot ld-sorted"></div>Sorted</div>
+            <div class="legend-item"><div class="legend-dot ld-current"></div>Selected</div>
+          </div>
+
+          <!-- Step explanation -->
+          <div class="glass step-expl" id="stepExpl" aria-live="polite">
+            <div class="step-expl-bar" id="explBar"></div>
+            <span class="step-expl-text" id="stepExplText">Select an algorithm above and enter your input to begin.</span>
+          </div>
+
+          <!-- Binary search range -->
+          <div class="glass-inner search-range-bar" id="searchRangeBar" aria-live="polite">
+            <span class="search-range-label">Search range</span>
+            <span class="search-range-val" id="searchRangeVal">&mdash;</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Algorithm info panel -->
+      <div class="glass info-panel-wrap" id="algoInfoPanel" style="padding:22px;">
+        <div class="algo-info-header">
+          <span class="algo-info-title" id="algoInfoTitle">Bubble Sort</span>
+          <div class="complexity-row" id="complexityRow"></div>
+        </div>
+        <div class="algo-info-body">
+          <div class="algo-info-col">
+            <h4>How it works</h4>
+            <ol class="how-steps" id="algoSteps"></ol>
+          </div>
+          <div class="algo-info-col">
+            <h4>Pseudocode</h4>
+            <div class="pseudocode-wrap">
+              <div class="pseudocode-header">algorithm</div>
+              <div class="pseudocode" id="algoPseudocode"></div>
+            </div>
+          </div>
+          <div class="algo-info-col">
+            <h4>Complexity Notes</h4>
+            <p id="algoNote"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         DATA STRUCTURES PLAYGROUND
+         =================================================== -->
+    <section id="section-datastructures" class="content-section" aria-label="Data Structures Playground">
+      <div class="section-header">
+        <span class="section-tag">Module 02</span>
+        <h2>Data Structures Playground</h2>
+        <p class="section-subtitle">Interact with Stack, Queue, and Linked List. Every operation updates the visualization immediately.</p>
+      </div>
+
+      <div class="ds-tabs" role="tablist">
+        <button class="ds-tab active" data-ds="stack" role="tab" aria-selected="true">Stack</button>
+        <button class="ds-tab" data-ds="queue" role="tab" aria-selected="false">Queue</button>
+        <button class="ds-tab" data-ds="linkedlist" role="tab" aria-selected="false">Linked List</button>
+      </div>
+
+      <!-- Stack -->
+      <div id="ds-stack" class="ds-panel" aria-hidden="false">
+        <div class="ds-layout">
+          <div class="glass ds-ctrl">
+            <h3>Stack</h3>
+            <div class="ds-concept">
+              A <strong>Stack</strong> is a <strong>LIFO</strong> structure &mdash; Last In, First Out. Think of a stack of trays in a cafeteria: you always place and remove from the top.
+              <br><br>
+              <strong>Push</strong> adds to the top. <strong>Pop</strong> removes from the top. You cannot access the bottom without removing elements above it.
+            </div>
+            <div>
+              <div class="ctrl-label">Value</div>
+              <input type="number" id="stackInput" class="ctrl-input" placeholder="Enter an integer" aria-label="Stack value" step="1" />
+            </div>
+            <div class="ds-btn-group">
+              <button class="btn btn-primary btn-sm" id="stackPushBtn">Push</button>
+              <button class="btn btn-secondary btn-sm" id="stackPopBtn">Pop</button>
+              <button class="btn btn-secondary btn-sm" id="stackPeekBtn">Peek</button>
+              <button class="btn btn-ghost btn-sm" id="stackClearBtn">Clear</button>
+            </div>
+            <div class="glass-inner ds-result" id="stackResult">Stack is empty. Enter a value and push.</div>
+            <div class="ds-size">Size: <span id="stackSize">0</span> &nbsp;/&nbsp; Capacity: <span>15</span></div>
+          </div>
+          <div class="glass ds-viz-area">
+            <div class="ds-viz-label">Stack &mdash; top to bottom</div>
+            <div id="stackViz" class="stack-viz" aria-live="polite" aria-label="Stack visualization">
+              <div class="ds-empty">Stack is empty</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Queue -->
+      <div id="ds-queue" class="ds-panel" style="display:none;" aria-hidden="true">
+        <div class="ds-layout">
+          <div class="glass ds-ctrl">
+            <h3>Queue</h3>
+            <div class="ds-concept">
+              A <strong>Queue</strong> is a <strong>FIFO</strong> structure &mdash; First In, First Out. Think of a queue at a ticket counter: the person who arrived first is served first.
+              <br><br>
+              <strong>Enqueue</strong> adds to the rear. <strong>Dequeue</strong> removes from the front.
+            </div>
+            <div>
+              <div class="ctrl-label">Value</div>
+              <input type="number" id="queueInput" class="ctrl-input" placeholder="Enter an integer" aria-label="Queue value" step="1" />
+            </div>
+            <div class="ds-btn-group">
+              <button class="btn btn-primary btn-sm" id="queueEnqBtn">Enqueue</button>
+              <button class="btn btn-secondary btn-sm" id="queueDeqBtn">Dequeue</button>
+              <button class="btn btn-secondary btn-sm" id="queuePeekBtn">Peek</button>
+              <button class="btn btn-ghost btn-sm" id="queueClearBtn">Clear</button>
+            </div>
+            <div class="glass-inner ds-result" id="queueResult">Queue is empty. Enter a value and enqueue.</div>
+            <div class="ds-size">Size: <span id="queueSize">0</span> &nbsp;/&nbsp; Capacity: <span>10</span></div>
+          </div>
+          <div class="glass ds-viz-area">
+            <div class="ds-viz-label">Queue &mdash; front to rear</div>
+            <div id="queueViz" class="queue-viz" aria-live="polite" aria-label="Queue visualization">
+              <div class="ds-empty">Queue is empty</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linked List -->
+      <div id="ds-linkedlist" class="ds-panel" style="display:none;" aria-hidden="true">
+        <div class="ds-layout">
+          <div class="glass ds-ctrl">
+            <h3>Linked List</h3>
+            <div class="ds-concept">
+              A <strong>singly linked list</strong> is a chain of nodes. Each node holds a value and a pointer to the next node. Unlike arrays, there is no fixed size and insertion/deletion is O(1) at known positions.
+              <br><br>
+              Traversal always starts from the <strong>HEAD</strong>.
+            </div>
+            <div>
+              <div class="ctrl-label">Value</div>
+              <input type="number" id="llInput" class="ctrl-input" placeholder="Enter an integer" aria-label="Linked list value" step="1" />
+            </div>
+            <div>
+              <div class="ctrl-label">Index (for Insert At)</div>
+              <input type="number" id="llIndex" class="ctrl-input" placeholder="e.g. 0, 1, 2" min="0" step="1" aria-label="Insert index" />
+            </div>
+            <div class="ds-btn-group">
+              <button class="btn btn-primary btn-sm" id="llInsertBeginBtn">Insert Begin</button>
+              <button class="btn btn-primary btn-sm" id="llInsertEndBtn">Insert End</button>
+              <button class="btn btn-secondary btn-sm" id="llInsertAtBtn">Insert At</button>
+              <button class="btn btn-secondary btn-sm" id="llDeleteBtn">Delete</button>
+              <button class="btn btn-secondary btn-sm" id="llSearchBtn">Search</button>
+              <button class="btn btn-ghost btn-sm" id="llClearBtn">Clear</button>
+            </div>
+            <div class="glass-inner ds-result" id="llResult">Linked list is empty. Insert a value to begin.</div>
+            <div class="ds-size">Size: <span id="llSize">0</span></div>
+          </div>
+          <div class="glass ds-viz-area ll-viz-area">
+            <div class="ds-viz-label">Linked List &mdash; HEAD to TAIL</div>
+            <div id="llViz" class="ll-viz" aria-live="polite" aria-label="Linked list visualization">
+              <div class="ds-empty">Linked list is empty</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         QUIZ
+         =================================================== -->
+    <section id="section-quiz" class="content-section" aria-label="Quiz and Practice">
+      <div class="section-header">
+        <span class="section-tag">Module 03</span>
+        <h2>Quiz &amp; Practice</h2>
+        <p class="section-subtitle">A randomised selection of questions each session. New questions every time you restart.</p>
+      </div>
+
+      <div class="quiz-layout">
+        <div class="glass quiz-panel">
+          <div class="quiz-progress-wrap">
+            <div class="quiz-track">
+              <div class="quiz-fill" id="quizFill" style="width:0%"></div>
+            </div>
+            <div class="quiz-meta">
+              <span id="quizProgressLabel">Question 1 of 12</span>
+              <span id="quizScoreLabel">Score: 0</span>
+            </div>
+          </div>
+
+          <div id="quizQuestionScreen">
+            <p class="quiz-q" id="quizQuestion">Loading&hellip;</p>
+            <div class="quiz-opts" id="quizOptions" role="group" aria-label="Answer options"></div>
+            <div class="glass-inner quiz-feedback" id="quizFeedback" aria-live="polite"></div>
+            <button class="btn btn-primary" id="quizNextBtn" style="display:none;">Next Question</button>
+          </div>
+
+          <div id="quizResultsScreen" style="display:none;">
+            <div class="quiz-results">
+              <div class="result-graphic" id="resultGraphic">&#9632;</div>
+              <h3 id="resultTitle">Complete</h3>
+              <div class="result-score" id="resultScore"></div>
+              <p id="resultMsg"></p>
+              <button class="btn btn-primary" id="quizRestartBtn">New Quiz</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass challenge-panel">
+          <h3>Practice Challenges</h3>
+          <p class="section-subtitle" style="font-size:0.8rem;margin-bottom:0;">Predict outputs and identify complexity classes.</p>
+          <div id="challengeArea"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         REFERENCE
+         =================================================== -->
+    <section id="section-reference" class="content-section" aria-label="Complexity Reference">
+      <div class="section-header">
+        <span class="section-tag">Module 04</span>
+        <h2>Complexity Reference</h2>
+        <p class="section-subtitle">Searchable Big-O cheat sheet. Filter by algorithm or data structure name.</p>
+      </div>
+
+      <div class="ref-search">
+        <input type="text" id="refSearch" class="ctrl-input" placeholder="Search&hellip; e.g. binary, linked list, merge" aria-label="Search reference" />
+      </div>
+
+      <div class="glass ref-tables">
+        <div class="ref-section-title">Sorting Algorithms</div>
+        <div class="table-wrap">
+          <table class="ref-table" id="sortingRefTable">
+            <thead><tr>
+              <th>Algorithm</th><th>Best</th><th>Average</th><th>Worst</th><th>Space</th><th>Stable</th><th>Notes</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="ref-section-title">Searching Algorithms</div>
+        <div class="table-wrap">
+          <table class="ref-table" id="searchingRefTable">
+            <thead><tr>
+              <th>Algorithm</th><th>Best</th><th>Average</th><th>Worst</th><th>Space</th><th>Notes</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="ref-section-title">Data Structure Operations</div>
+        <div class="table-wrap">
+          <table class="ref-table" id="dsRefTable">
+            <thead><tr>
+              <th>Structure</th><th>Access</th><th>Search</th><th>Insert</th><th>Delete</th><th>Space</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="glass" style="padding:24px;margin-top:18px;">
+        <div class="ref-section-title" style="margin-top:0;">Big-O Complexity Classes</div>
+        <div class="bigo-grid" id="bigoGrid"></div>
+      </div>
+    </section>
+
+    <!-- Status bar -->
+    <div class="status-bar" id="statusBar">
+      <span class="status-indicator" aria-hidden="true"></span>
+      <span class="status-text" id="statusText">Ready</span>
+    </div>
+  </div>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <script src="/static/js/algorithms.js"></script>
+  <script src="/static/js/data-structures.js"></script>
+  <script src="/static/js/quiz.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
